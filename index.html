@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usd1 Society</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Freckle+Face&family=Lilita+One&family=Rubik+Broken+Fax&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General Body Styling */
+        body {
+            background-color: #121212;
+            font-family: 'Rubik Broken Fax', sans-serif;
+            color: white;
+            text-align: center;
+            overflow-y: hidden; /* Disable scrolling until unlocked */
+        }
+
+        /* Styling for unlocked content */
+        .content {
+            display: block;
+            padding: 20px;
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('Senza\ titolo\ \(2560\ x\ 1400\ px\)\ \(1\).jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative; /* Allow stacking of other elements */
+        }
+
+        /* Centered Key Image */
+        .centered-key {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .centered-key:hover {
+            transform: scale(1.1);
+        }
+
+        .centered-key img {
+            width: 250px;
+            height: auto;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Overlay effect */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #2d2d2d;
+            padding: 30px;
+            border-radius: 0; /* Set border-radius to 0 for sharp corners */
+            width: 300px;
+            color: white;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            font-family: 'Rubik Broken Fax', sans-serif; /* You can use an old-style font */
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #5c5c5c; /* Golden yellow color for a more vintage look */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Give it a faint shadow to make it appear older */
+        }
+
+        #passwordInput {
+            background-color: #444;  /* Slightly muted gray */
+            border: 3px solid #363433;  /* Darker worn wood effect for input field */
+            color: #f1e6d7;  /* Faded parchment-like color */
+            font-size: 18px;
+            padding: 12px;
+            width: 100%;
+            border-radius: 0;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            background-color: #3a2c1d;  /* Dark, earthy brown for the button */
+            color: #d1b58b;  /* Pale gold for the text */
+            font-size: 16px;
+            padding: 10px 20px;
+            border: 3px solid #6e4f37;  /* Worn wooden effect for the button border */
+            border-radius: 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #5a4430;  /* Slightly lighter brown for hover effect */
+        }
+
+        .error-message {
+            color: #d9534f;  /* Red to signify error */
+            margin-top: 10px;
+            font-size: 14px;
+            font-family: 'Freckle Face', sans-serif;  /* Handwritten look for error message */
+        }
+
+        /* Section Styling */
+        h1, h2 {
+            font-size: 36px;
+            font-family: 'Rubik Broken Fax', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ul li {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .realm-image {
+            position: absolute; /* Absolute position within the container */
+            width: 300px; /* Set width of images */
+            z-index: 1; /* Ensure images are above background */
+            border-radius: 5px;
+        }
+
+        /* Background Image Fix */
+        #trenchnomics-image {
+            position: absolute;
+            top: -100px;
+            right: 100px;
+            z-index: 0; /* Behind text */
+            opacity: 0.6; /* Optional blending effect */
+        }
+
+        /* Text Layer */
+        #trenchnomics {
+            position: relative; /* Establish stacking context for text */
+            z-index: 2; /* Ensures the text is above the image */
+        }
+
+        /* Other Section Elements */
+        #about-image {
+            top: -30px;
+            left: 50px;
+        }
+
+        #socials-image {
+            bottom: 50px;
+            left: 200px;
+        }
+
+        /* Underline for Titles */
+        .underline-title {
+            text-decoration: underline;
+        }
+
+        /* First Word Styling */
+        p .first-word {
+            color: #beac7d; /* Custom color for first word */
+            font-weight: bold; /* Optional: make it bold */
+        }
+
+        /* Spacer Image Styling */
+        .spacer-image {
+            display: block;
+            margin: 20px auto;
+            width: 300px; /* Adjust width as needed */
+            height: auto;
+            opacity: 0.8; /* Slight transparency */
+        }
+
+        a {
+            color: #beac7d;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #d1b58b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Key Image Trigger -->
+        <div class="centered-key" onclick="openPasswordModal()">
+            <img src="vecteezy_simple-lock-and-wing-logo_20390190-removebg-preview.png" alt="Key Icon">
+            <p class="key-text"></p>
+        </div>
+
+        <!-- Hidden Content -->
+        <div class="content hidden" id="content">
+            <h1 class="rubik-broken-fax-regular usd1-realms-title">Usd1 Society</h1>
+            <p>Initiate, you have found the gateway. The Usd1 Society operates beyond the sight of the unworthy. Your curiosity has been noted. Proceed with caution—ignorance is a far safer path.</p>
+
+            <section id="about">
+                <h2 class="rubik-broken-fax-regular underline-title">Our Shadow</h2>
+                <p><span class="first-word">We</span> are the unseen hand. A syndicate woven into the fabric of society itself, operating from the deepest shadows. Our influence is absolute, our network vast, and our existence denied by those who fear the truth.</p>
+                <p>To know our name is a risk. To seek us out is a declaration. There is no turning back.</p>
+                <img src="animated-line-image-0467.gif" alt="Spacer Image" class="spacer-image">
+            </section>
+
+            <section id="trenchnomics">
+                <h2 class="rubik-broken-fax-regular underline-title">The Economy of Influence</h2>
+                <p><span class="first-word">Our</span> currency is not traded on any open market. It is measured in secrets, in leverage, and in silent obedience. Assets are moved, fortunes are shifted, and power is consolidated away from the blinding light of scrutiny.</p>
+                <p>Compliance is rewarded. Opposition is erased.</p>
+                <img src="animated-line-image-0467.gif" alt="Spacer Image" class="spacer-image">
+            </section>
+
+            <section id="arcane-links">
+                <h2 class="rubik-broken-fax-regular underline-title">Channels of Communication</h2>
+                <p>These conduits are fragile and transient. Use them with discretion. The watchful eyes of outsiders are always searching.</p>
+                <ul>
+                    <li><a href="https://x.com/Usd1Society" target="_blank">Twitter: @Usd1Society</a></li>
+                    <li><a href="https://x.com/Usd1Society" target="_blank">Frequency: Secure Channel 7</a></li>
+                </ul>
+                <p>This link is not a mistake. You were meant to find it.</p>
+                <img src="animated-line-image-0467.gif" alt="Spacer Image" class="spacer-image">
+            </section>
+
+            <section id="artifacts">
+                <h2 class="rubik-broken-fax-regular underline-title">The Instruments</h2>
+                <p>These are the tools of our trade. They are not for the faint of heart.</p>
+                <ul>
+                    <li>The Dossier of Compliance</li>
+                    <li>The Cypher of Whispers</li>
+                    <li>The Ledger of Shadows</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Enter the Ticker (All lowercase)</h2>
+            <input type="password" id="passwordInput" placeholder="Enter Code">
+            <button type="button" onclick="togglePasswordVisibility()">Reveal</button>
+            <button onclick="checkPassword()">Unlock</button>
+            <div id="errorMessage" class="error-message hidden">The code is incorrect. Try again, Seeker.</div>
+        </div>
+    </div>
+
+    <script>
+        // Function to open the password modal
+        function openPasswordModal() {
+            document.getElementById("passwordModal").style.display = "flex"; // Display modal
+        }
+
+        // Function to close the password modal
+        function closePasswordModal() {
+            document.getElementById("passwordModal").style.display = "none";
+        }
+
+        // Function to check the password
+        function checkPassword() {
+            const passwordInput = document.getElementById("passwordInput").value;
+            const correctPasswords = ["society1", "SOCIETY1", "$society1", "$SOCIETY1"]; // Updated passwords for USD1 theme
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (correctPasswords.includes(passwordInput)) {
+                document.getElementById("content").classList.remove("hidden");
+                document.body.style.overflowY = 'scroll'; // Enable scrolling
+                closePasswordModal();
+                errorMessage.style.display = "none";
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+
+        // Function to toggle the password visibility
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("passwordInput");
+            const button = document.querySelector("#passwordModal button");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text"; // Show password
+                button.textContent = "Hide";
+            } else {
+                passwordInput.type = "password"; // Hide password
+                button.textContent = "Reveal";
+            }
+        }
+
+        // Add event listener for 'Enter' key to submit password
+        document.getElementById("passwordInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
